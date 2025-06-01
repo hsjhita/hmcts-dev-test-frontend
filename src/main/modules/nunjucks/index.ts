@@ -10,7 +10,7 @@ export class Nunjucks {
 
   enableFor(app: express.Express): void {
     app.set('view engine', 'njk');
-    nunjucks.configure(path.join(__dirname, '..', '..', 'views'), {
+    const nunEnv = nunjucks.configure(path.join(__dirname, '..', '..', 'views'), {
       autoescape: true,
       watch: this.developmentMode,
       express: app,
@@ -18,6 +18,16 @@ export class Nunjucks {
 
     app.use((req, res, next) => {
       res.locals.pagePath = req.path;
+      nunEnv.addGlobal('dateToFormat', (dateToTransform: string) => {
+        const date = new Date(dateToTransform);
+        return date.toLocaleDateString('en-GB', {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        });
+      });
       next();
     });
   }

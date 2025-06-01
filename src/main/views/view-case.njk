@@ -1,0 +1,58 @@
+{% extends "template.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+
+{% block content %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/"
+  }) }}
+
+  <h1 class="govuk-heading-xl">You're viewing Case: {{ case.caseNumber }}</h1>
+
+  {{ govukSummaryList({
+    rows: [
+      {
+        key: {
+        text: "ID"
+      },
+        value: {
+        text: case.id
+      }
+      },
+      {
+        key: {
+        text: "Case Number"
+      },
+        value: {
+        text: case.caseNumber
+      }
+      },
+      {
+        key: {
+        text: "Title"
+      },
+        value: {
+        html: case.title
+      }
+      },
+      {
+        key: {
+        text: "Description"
+      },
+        value: {
+        html: case.description
+      }
+      {
+        key: {
+        text: "Created Date"
+      },
+        value: {
+        html: dateToFormat(case.createdDate)
+      }
+      }
+    ]
+  }) }}
+
+{% endblock %}

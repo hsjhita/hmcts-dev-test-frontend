@@ -1,0 +1,25 @@
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+{% extends "template.njk" %}
+
+{% block content %}
+
+  <h1 class="govuk-heading-l">Create a New Case</h1>
+
+  <form action="/add-case" method="POST" class="govuk-form-group">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="caseNumber">Case Number:</label>
+      <input class="govuk-input" id="caseNumber" name="caseNumber" type="number" required>
+    </div>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="title">Title:</label>
+      <input class="govuk-input" id="title" name="title" type="text" required>
+    </div>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="description">Description (optional):</label>
+      <textarea class="govuk-textarea" id="description" name="description" rows="5" maxlength="255"></textarea>
+    </div>
+    <br>
+    <button class="govuk-button" type="submit">Create Case</button>
+  </form>
+{% endblock %}
